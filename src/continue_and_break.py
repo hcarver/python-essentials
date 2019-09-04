@@ -26,7 +26,7 @@ NESTED CONTINUE AND BREAK
 python_code = [
     "for x in range(5):  # x will start at 0 and finish at 4".split(),
     "print(5 * x)  # This will print from 0 to 20, going up in 5s".split(),
-    "print('x is', x)  # Print x as well"
+    "print('x is', x)  # Print x as well".split()
     ]
 #for line in python_code:
 #    for token in line:
