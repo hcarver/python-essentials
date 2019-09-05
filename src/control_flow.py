@@ -1,17 +1,17 @@
 """An introduction to boolean logic and control flow in Python"""
 
 """
-BOOLEAN OPERATORS 1
+BOOLEAN OPERATORS
 -------------------
 """
-a = True
-b = True
+upstairs_switch_on   = True
+downstairs_switch_on = True
 
-xor = a or b
+light_on = upstairs_switch_on or downstairs_switch_on
 
-# print("a is", str(a))
-# print("b is", str(b))
-# print("a xor b is", str(xor))
+# print("upstairs_switch_on is", str(upstairs_switch_on))
+# print("downstairs_switch_on is", str(downstairs_switch_on))
+# print("light_on is", str(light_on))
 
 """
 IF BLOCKS
