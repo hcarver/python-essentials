@@ -4,13 +4,13 @@
 BOOLEAN OPERATORS
 -------------------
 """
-upstairs_switch_on   = True
-downstairs_switch_on = True
+upstairs_switch_up   = True
+downstairs_switch_up = True
 
-light_on = upstairs_switch_on or downstairs_switch_on
+light_on = upstairs_switch_up or downstairs_switch_up
 
-# print("upstairs_switch_on is", str(upstairs_switch_on))
-# print("downstairs_switch_on is", str(downstairs_switch_on))
+# print("upstairs_switch_up is", str(upstairs_switch_up))
+# print("downstairs_switch_up is", str(downstairs_switch_up))
 # print("light_on is", str(light_on))
 
 """
