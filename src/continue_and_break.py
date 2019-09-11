@@ -15,8 +15,8 @@ BREAK
 """
 python_code = "multiple_of_5 = x % 5 == 0  # x % 5 is the remainder when dividing by 5. If it's 0, the number divides exactly by 5."
 python_code_tokens = python_code.split()
-#for letter in python_code_tokens:
-#    print(letter)
+#for token in python_code_tokens:
+#    print(token)
 
 
 """
