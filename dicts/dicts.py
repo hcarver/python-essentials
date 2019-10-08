@@ -89,7 +89,7 @@ name = 'dom'
 fallback_name = 'dominic'
 
 # print()
-# print("There were", boys_names_2010[name], "boys named", name.title())
+# print("There were", boys_names_2010[name], "boys named", name)
 
 """
 ITERATING THROUGH A DICT
