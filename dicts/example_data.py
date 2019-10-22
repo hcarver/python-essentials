@@ -4,7 +4,9 @@ from collections import defaultdict
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 
-DATA_PATH = os.path.join(dir_path, 'data')
+CURRICULUM_PATH = os.path.dirname(dir_path)
+DATA_PATH = os.path.join(CURRICULUM_PATH, 'data')
+
 FEMALE_FILE = os.path.join(DATA_PATH, 'popular_female_names_by_decade.csv')
 MALE_FILE = os.path.join(DATA_PATH, 'popular_male_names_by_decade.csv')
 
