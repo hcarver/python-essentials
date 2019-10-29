@@ -123,3 +123,91 @@ def most_popular_name(joaquin, monique):
 #       most_popular_name(dominique=32, quinton=45, humberto=91, guillermo=3))
 # print("Most popular name of none:", most_popular_name())
 
+
+"""
+MULTIPLE ARGUMENT TYPES IN ONE FUNCTION
+---------------------------------------
+"""
+
+# Do not edit this function
+def print_details(name, *friends, age=1, **favourites):
+    print("My name is", name)
+    years_string = "year" if age == 1 else "years"
+    print("I am", age, years_string, "old")
+    print("I am friends with:")
+    for friend in friends:
+        print("*", friend)
+
+    for key, value in favourites.items():
+        print("My favourite", key, "is", value)
+
+# The call to print_details below should print:
+"""
+My name is Skiller Whale
+I am 1 year old
+I am friends with:
+* Fin Diesel
+* Whaleiam Shakespeare
+My favourite island is Majorca
+My favourite music is orcastral
+My favourite flower is the orcaid
+"""
+
+print()
+print_details(...)
+
+
+"""
+FUNCTIONS AS OBJECTS
+--------------------
+"""
+
+boys_names = list(boys_popularity_by_decade[2010])
+
+
+def longer_than_ten(name):
+    """Returns True if name is more than 10 letters long, False otherwise"""
+    return []
+
+# assert longer_than_ten("Averylongname") is True, "Averylongname is longer than 10"
+# assert longer_than_ten("Tenletters") is False, "Tenletters is not longer than 10"
+
+def starts_with_x(name):
+    """Returns True if name starts with x, and False otherwise"""
+    return []
+
+# assert starts_with_x("xenia") is True, "xenia starts with x"
+# assert starts_with_x("alexander") is False, "alexander does not start with x"
+
+def filter_names(filter_fun, names):
+    """Filter a list of names, returning those where filter_fun(name) is True"""
+    return names
+
+
+# Don't edit any of the code below here (except to uncomment)
+
+# print()
+# print("Names longer than ten letters:")
+# for name in filter_names(longer_than_ten, boys_names):
+#     print("*", name)
+#
+# print()
+# print("Names which start with x:")
+# for name in filter_names(starts_with_x, boys_names):
+#     print("*", name)
+
+
+"""
+LAMBDA FUNCTIONS
+----------------
+"""
+
+# print()
+# print("Names that are two letters long:")
+# for name in filter_names(..., boys_names):
+#     print("*", name)
+#
+# print()
+# print("Names which start with y:")
+# for name in filter_names(..., boys_names):
+#     print("*", name)
