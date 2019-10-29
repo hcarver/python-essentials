@@ -53,7 +53,7 @@ RETURNING VALUES
 
 # print()
 # print("The most popular girls name in 2010 was:", most_popular_name(girls_popularity_by_decade[2010]))
-# print("The most popular girls name in 2010 was:", least_popular_name(girls_popularity_by_decade[2010]))
+# print("The least popular girls name in 2010 was:", least_popular_name(girls_popularity_by_decade[2010]))
 
 # most_popular, least_popular = get_extreme_names(boys_popularity_by_decade[2010])
 # print("The most popular boys name in 2010 was:", most_popular)
