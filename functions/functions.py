@@ -153,8 +153,8 @@ My favourite music is orcastral
 My favourite flower is the orcaid
 """
 
-print()
-print_details(...)
+# print()
+# print_details(...)
 
 
 """
