@@ -101,7 +101,7 @@ def longest_name(name_1, name_2):
 # print()
 # print("Longest name of two:", longest_name('dominique', 'quinton'))
 # print("Longest name of four:",
-#       longest_name('dominique', 'quinton', 'humberto', 'guillermo'))
+#       longest_name('dominic', 'quinton', 'humberto', 'guillermo'))
 # print("Longest name of none:", longest_name())
 
 
