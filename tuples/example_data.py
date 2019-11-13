@@ -1,6 +1,10 @@
+import os
 import csv
 
-with open('profile_data.csv') as f:
+dir_path = os.path.dirname(os.path.abspath(__file__))
+
+
+with open(os.path.join(dir_path, 'profile_data.csv')) as f:
     reader = csv.DictReader(f)
     all_profiles_raw = [dict(x) for x in reader]
 
