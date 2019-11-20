@@ -93,7 +93,7 @@ def contains_minus_one(collection):
 
     collection can be a set, list or tuple
     """
-    return -1 in collection
+    pass
 
 
 def perform_time_test(collection):
@@ -156,14 +156,18 @@ than the `remove_items` function.
 """
 
 def remove_items(s, items_to_remove):
-    """Remove all of the elements in items_to_remove from the set s using remove
+    """Remove all of the elements in items_to_remove from the set s
+
+    This should be done using s.remove()
     """
     # <<< YOUR CODE HERE - use the remove method only >>>
     pass
 
 
 def discard_items(s, items_to_remove):
-    """Remove all of the elements in items_to_remove from the set s using discard
+    """Remove all of the elements in items_to_remove from the set s
+
+    This should be done using s.discard()
     """
     # <<< YOUR CODE HERE - use the discard method only  >>>
     pass
@@ -224,7 +228,7 @@ unmysterious_sci_fi_thrillers = ...
 # <<< DO NOT CHANGE THE CODE BELOW THIS LINE (except to uncomment) >>>
 
 # print()
-# print("Crime, but not drama movies:", crime_but_not_drama)
+# print("Crime, but not Drama movies:", crime_but_not_drama)
 # print("Musical, or Western movies:", music_or_western)
 # print("Romcoms (Romantic and Comedy) movies:", romance_and_comedy)
 # print("Unmysterious Science Fiction Thrillers:", unmysterious_sci_fi_thrillers)
