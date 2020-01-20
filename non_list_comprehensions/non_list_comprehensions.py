@@ -68,14 +68,14 @@ DICT COMPREHENSIONS
 ------------------
 
 Replace the ellipsis (...) below, with a dict comprehension, which iterates
-through `word_list`, and creates a dict which has a key of a  word, and a value
+through `word_list`, and creates a dict which has a key of a word, and a value
 of the length of that word, only for each word beginning with k in word_list.
 
 For example, if word_list were `['keyhole', 'key', 'door', 'keychain', 'kayak']`
 then `k_word_lengths` would be `{'keyhole': 7, 'key': 3, 'keychain': 8, 'kayak': 5}`
 """
 
-# The set of three letter word starts beginning with k
+# The dictionary of words beginning with k and their lengths
 k_word_lengths = ...
 
 # <<< DO NOT CHANGE THE CODE BELOW THIS LINE (except to uncomment) >>>
@@ -86,26 +86,24 @@ k_word_lengths = ...
 
 
 """
-ADVANCED COMPREHENSIONS
+MORE DICT COMPREHENSIONS
 ------------------
 
 Replace the ellipsis (...) below, with a dict comprehension, which iterates
-through the words in `sentence` and through the letters in each word, and
-creates a dict which has a key of one of the letters, and a value of the word
-containing that letter, but only if the letter is NOT a vowel (a, e, i, o, u).
+through the keys and values of the `k_word_lengths` dict and creates a new dict
+which has the same keys an values, but only for words that are 7 letters or
+longer.
 
-For example, if sentence were `['where', 'is', 'my', 'cup']`
-then `words_containing_letter` would be
-`{'w': 'where', 'h': 'where', 'r': 'where', 's': 'is', 'm': 'my', 'y': 'my',
-'c': 'cup', 'p': 'cup'}`
+For example, if `k_word_lengths` were `{'keyhole': 7, 'key': 3, 'keychain': 8, 'kayak': 5}`
+then `long_k_words` would be `{'keyhole': 7, 'keychain': 8}`
 """
-sentence = ['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']
 
-# The dictionary of consonants and the word in sentence which contains them
-words_containing_letter = ...
+# The dictionary of words beginning with k and their lengths, only for words of
+# 7 letters or more.
+long_k_words = ...
 
 # <<< DO NOT CHANGE THE CODE BELOW THIS LINE (except to uncomment) >>>
 
 # print()
-# print("The word in the sentence containing each consonant is:")
-# print(words_containing_letter)
+# print("The length of each long word beginning with k is:")
+# print(long_k_words)
