@@ -1,124 +1,201 @@
 """An introduction to nested list comprehensions in Python"""
 
+from pprint import pprint
+
+from example_data import word_list, words_by_letter
 
 """
-UNROLLING NESTED LISTS
-----------------------
+COMPREHENSIONS WITH MULTIPLE ITERATORS
+--------------------------------------
 
-In this section we'll flatten nested lists (sometimes called matrices) to one-dimensional lists.
+A company sells wooden table tops, which can be cut to a custom (rectangular) 
+size. The maximum size for each edge is 200cm, and sizes can be cut to the 
+nearest 1cm. For example, a table top could be requested sized 150cm x 32cm.
 
-countries_by_continent contains three lists, one with some countries in Europe, one with some countries in North America, one with some countries in Africa.
+The company charges by the amount of wood used, or area of the table top. That 
+is the requested width * length. Find out the number of possible different areas 
+that could be requested. Note that some different combinations of dimensions 
+could result in the same area (2 * 10 is the same as 4 * 5)
 
-Transform it into a one-dimensional list containing all of the countries that appear in countries_by_continent.
+1. Uncomment the print statements at the bottom of the section.
+2. Update `possible_areas` so that it is a collection containing all of the
+   possible areas the company would be able to sell. 
+3. Update `n_possible_areas` so that it contains the number of distinct values
+   in the `possible_areas` collection.
 
-1. Uncomment the assert and print statements at the bottom of this section
-2. Replace each of the ellipses (...) with a list comprehension so that these 
-   variables end up as one-dimensional list.
-3. Run the script. If your list comprehensions are correctly defined then you
-   should be able to run it without seeing any errors.
+The company has decided it won't sell table tops which "aren't square enough"
+where the length and width are more than 50cm apart. So (50 * 90 is fine, but
+120 * 180 is not)
+
+4. Update `square_enough_areas` so it contains only the areas which are possible 
+   for sufficiently 'square' table tops by the definition given above.
+5. Update `n_square_enough_areas` so that it contains the number of distinct 
+   values in the `square_enough_areas` collection.
 """
 
-countries_by_continent=[
-        ['Italy', 'Spain', 'Greece'],
-        ['US', 'Canada'],
-        ['Kenya', 'Tanzania', 'Morocco', 'Tunisia']
-        ]
+# Create a list of the possible edge sizes - 1 to 200 (inclusive)
+sizes = list(range(1, 201))
 
-# please return a flat country list, like ['Italy', 'Spain', ... ,'Tunisia']
-countries = ...
+possible_areas = ...
+n_possible_areas = ...
 
+square_enough_areas = ...
+n_square_enough_areas = ...
 
 # <<< DO NOT CHANGE THE LINES BELOW HERE (except to uncomment) >>>
 
-# print("countries")
-# print(countries)
-
-# assert len(countries) == 9, "we expected the list to have 9 elements -- did you flatten it correctly?"
-# assert type(countries[0]) == str, "the list has the wrong structure, it should only contain String elements"
-# assert countries[0] == 'Italy', "the list doesn't start with the element we expected"
-
+# print("It's possible to get", n_possible_areas, "table areas")
+# print("It's possible to get", n_square_enough_areas, "'squarish' table areas")
 
 
 """
-If we use a different type of iterable, such as the dictionary in the following example, we can still use nested comprehensions.
+CREATING NESTED LISTS - PART 1
+------------------------------
 
-Try to achieve the same outcome as before, but this time you'll be flattening the dictionary named_countries_by_continent.
+For this section you will use a list of words, `word_list`. If you wish to look 
+at the words list, then you can uncomment the `print(word_list)` line to see it 
+in the output.
 
-As you can see, it groups the countries together as in the above example, but also names the groups.
+Some words in `word_list` are the same as another word except for the first 
+letter being different. We'll call these 'start_pairs'. For example, 
+the pairs ['batters', and 'hatters'] or ['clamour' and 'glamour'] are both 
+start_pairs. 
 
+1. Uncomment the assert and print statements in this section
+2. Replace the empty list ([]) in the definition of `start_pairs` with a
+   nested comprehension so it is a collection containing all of the 
+   'start pairs' where:
+      * the words are more than 5 letters long.
+      * the two words are identical EXCEPT for the first letter
+   You can choose what type of comprehensions to use (sets, tuples, etc.)
+3. Run the script. If your comprehensions are correctly defined then you
+   should be able to run it without seeing any errors.
 """
 
-named_countries_by_continent={
-        'Europe': ['Italy', 'Spain', 'Greece'],
-        'North America': ['USA', 'Canada'],
-        'Africa': ['Kenya', 'Tanzania', 'Morocco', 'Tunisia']
-        }
+# word_list looks like: ['ability', 'able', 'above', 'abstract', ... , 'zone']
+# This print line is just to display word_list, feel free leave it commented.
+# print(word_list)
 
-# <<< CHANGE THE LINES BELOW HERE  - replace ... with list comprehensions >>>
-
-# please return a flat country list, like ['Italy', 'Spain', ... ,'Tunisia']
-named_countries = ...
+# The start pairs which have more than 5 letters
+start_pairs = []
 
 # <<< DO NOT CHANGE THE LINES BELOW HERE (except to uncomment) >>>
 
-# print("")
-# print("named_countries")
-# print(named_countries)
+for w1, w2 in start_pairs:
+    # assert w1[1:] == w2[1:], w1 + " and " + w2 + "are not start pairs"
+    # assert len(w1) >= 6, w1 + " is less than 6 letters long"
+    pass
 
-# assert len(named_countries) == 9, "we expected the list to have 9 elements -- did you flatten it correctly?"
-# assert type(named_countries[0]) == str, "the list has the wrong structure, it should only contain String elements"
-# assert named_countries[0] == 'Italy', "the list doesn't start with the element we expected"
+# print()
+# print("There are", len(start_pairs), "start_pairs with 6 or more letters")
+# print(start_pairs)
 
 
 """
-CREATING NESTED LISTS
----------------------
+CREATING NESTED LISTS - PART 2
+------------------------------
 
-There are two lists, called colours and fruit.
+In this section you'll use a nested comprehension to create a dictionary of 
+anagrams, where each key is a word, and each value is a list containing all of
+the anagrams of the word which occur in word_list.
 
-First, you will join them together so that each fruit is paired with each colour, like so:
-['red', 'Apples'], ['red', 'Peaches'] etc, resulting in 16 colour/fruit pairs.
+Note: Anagrams are words which contain EXACTLY the same letters (e.g. 
+stressed & desserts or elbow & below). desert & dessert are NOT anagrams because 
+they contain a different number of the letter s. 
 
-Second, you will create pairs of number and fruit, so that each fruit and number only appears once, e.g.:
-[1, 'Apples'], [2, 'Peaches'] etc, resulting in four pairs.
+1. Uncomment the print (and pprint) statements at the bottom of this section
+2. Replace the ellipses (...) with a dict comprehension so that anagrams is a
+   dict where:
+   * Each key is one of the words in `start_words`
+   * Each value is a list containing all the anagrams of the key in word_list.
+
+For example, if the start_words were ['seahorse', 'crustacean', 'lobster'], then
+anagrams might look like:
+{
+    'seahorse': ['seashore'],
+    'crustacean': [],
+    'lobster': ['bolster', 'bolters']
+}
+
+HINT: You can tell if two words are anagrams if they are equal once their letters are sorted. 
+"""
+
+start_words = ['skiller', 'whale', 'dolphin', 'python', 'loops']
+anagrams = ...
+
+# print("\nAnagrams:")
+# pprint(anagrams)
+
+
+"""
+WORKING WITH NESTED ITERABLES
+-----------------------------
+
+countries_by_continent is a list containing four lists, each one containing 
+countries from a different continent ('Europe', 'North America', 'Africa', 'Asia')
+
+You'll use a list comprehension to transform this list of lists into a 
+one-dimensional list, `countries` which contains all the countries from each of 
+the continents.
 
 1. Uncomment the assert and print statements at the bottom of this section
-2. Replace each of the ellipses (...) with a list comprehension so that these 
-   variables end up as nested list.
+2. Replace the ellipsis (...) with a list comprehension so that 
+   flattened_countries is a one-dimensional list of country names.
 3. Run the script. If your list comprehensions are correctly defined then you
-   should be able to run it without seeing any errors.
-
+   should be able to run it without seeing any errors. Make sure the list of 
+   flattened countries looks like what you were expecting.
 """
 
-nums = [0, 1, 2, 3]
-colours=['red', 'green', 'blue', 'plaid']
-fruit = ["Apples", "Peaches", "Pears", "Bananas"]
+countries_by_continent = [
+    ['Italy', 'Spain', 'Greece'],
+    ['US', 'Canada'],
+    ['Kenya', 'Tanzania', 'Morocco', 'Tunisia'],
+    ['China', 'India', 'Malaysia', 'Bangladesh'],
+]
+
+# return a flat country list, like ['Italy', 'Spain', ... , 'Bangladesh']
+flattened_countries = ...
+
+# <<< DO NOT CHANGE THE LINES BELOW HERE (except to uncomment) >>>
+
+# print("\nCountries list:")
+# print(flattened_countries)
+#
+# assert len(flattened_countries) == 13, "we expected the list to have 13 elements -- did you flatten it correctly?"
+# assert type(flattened_countries[0]) == str, "the list has the wrong structure, it should only contain str elements"
 
 
-# please create a structure like [['red', 'Apples'], ['red', 'Peaches'], ... , ['plaid', 'Bananas']]
-assorted_fruit = ...
+"""
+WORKING WITH NESTED ITERABLES - EXTENSION
+-----------------------------------------
 
-# please create a structure like  [[0, 'Apples'], [1, 'Peaches'], [2, 'Pears'], [3, 'Bananas']]
-numbered_fruit = ...
+The variable `words_by_letter` is a dictionary containing all of the words in 
+`word_list` grouped by letter, but not necessarily sorted. For example:
+{
+    'a': ['ability', 'able', 'above', 'abstract', 'academic', ... , 'az'],
+    'b': ['baby', 'background', 'bad', 'bag', 'balance', ... , 'buying'],
+    ... 
+}
 
-# print("")
-# print("assorted_fruit")
-# print(assorted_fruit)
+Use a nested comprehension to create a list, `first_ten_words_by_letter`, which
+contains the alphabetically first 10 words starting with each letter (or all 
+words starting with that letter if there are fewer than 10).
+ 
+For example:
+['ability', 'able', 'above', 'abstract', 'academic', 'accept', 'accepted', 'accessories', 'accommodation', 'according', 'baby', 'background', ... ]
 
-# assert len(assorted_fruit) == 16
-# assert len(assorted_fruit[0]) == 2
-# assert type(assorted_fruit) == list
-# assert type(assorted_fruit[0]) == list
-# assert assorted_fruit[0][0] == 'red'
-# assert assorted_fruit[0][1] == 'Apples'
+1. Uncomment the print statements at the bottom of the section
+2. Replace the ellipsis (...) with a comprehension which creates a new flat list
+   containing the first 10 words starting with each letter of the alphabet.
+"""
 
-# print("")
-# print("numbered_fruit")
-# print(numbered_fruit)
+# Use `words_by_letter` to create first_ten_words_by_letter
+first_ten_words_by_letter = ...
 
-# assert len(numbered_fruit) == 4
-# assert len(numbered_fruit[0]) == 2
-# assert type(numbered_fruit) == list
-# assert type(numbered_fruit[0]) == list
-# assert numbered_fruit[0][0] == 0
-# assert numbered_fruit[0][1] == 'Apples'
+# print("\nFirst ten words starting with each letter")
+# pprint(sorted(first_ten_words_by_letter))
+
+# print("The 14th word in the list is:", first_ten_words_by_letter[13])
+# print("The 220th word in the list is:", first_ten_words_by_letter[220])
+
+
