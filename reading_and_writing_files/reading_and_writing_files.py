@@ -1,4 +1,4 @@
-"""An introduction to reading and writing text files"""
+"""An introduction to reading and writing files"""
 
 import os
 from collections import Counter
@@ -10,9 +10,9 @@ from collections import Counter
 # If you run the Python script from the directory containing `users_log.txt`
 # then it would be enough to just set `log_file_path = 'users_log.txt'`
 
-this_file_path = os.path.abspath(__file__)  # e.g. /Users/me/python-essentials/reading_and_writing_text_files/reading_and_writing_text_files.py
-file_dir = os.path.dirname(this_file_path)  # e.g. /Users/me/python-essentials/reading_and_writing_text_files/
-log_file_path = os.path.join(file_dir, 'users_log.txt')  # e.g. /Users/me/python-essentials/reading_and_writing_text_files/users_log.txt
+this_file_path = os.path.abspath(__file__)  # e.g. /Users/me/python-essentials/reading_and_writing_files/reading_and_writing_files.py
+file_dir = os.path.dirname(this_file_path)  # e.g. /Users/me/python-essentials/reading_and_writing_files/
+log_file_path = os.path.join(file_dir, 'users_log.txt')  # e.g. /Users/me/python-essentials/reading_and_writing_files/users_log.txt
 
 print("Log file located at:", log_file_path)
 
@@ -73,8 +73,8 @@ all_names_list = ...
 
 
 """
-WRITING TEXT FILES
-------------------
+WRITING FILES
+-------------
 Now you have a list of all the names from the log file, you can use a Counter
 object to find the users who have most often accessed Skiller Whale. This code
 is already written out below, with the results placed in the variable
