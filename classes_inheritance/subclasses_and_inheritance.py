@@ -164,7 +164,7 @@ has a `years_employed` attribute on each instance.
 #
 # print()
 # for s in [example_1, example_2, example_3, example_4]:
-#     if s.is_palindrome:
+#     if s.is_palindrome():
 #         print(s, "is palindromic!")
 #     else:
 #         print(s, "is NOT palindromic")
