@@ -3,6 +3,7 @@ import os
 import json
 import hashlib
 import time
+from urllib.parse import urljoin
 
 WATCHED_EXTS = [".py"]
 IGNORE_DIRS = [".git"]
@@ -19,17 +20,24 @@ ASCII_ART = """
 """
 
 
+SERVER_URL = os.getenv('SERVER_URL', "https://train.skillerwhale.com")
+
+
+def create_skiller_whale_url(path):
+    return urljoin(SERVER_URL, path)
+
+
 class Updater:
     def __init__(self, attendance_id):
         self.attendance_id = attendance_id
 
     @property
-    def hostname(self):
-        return os.environ.get('SERVER_URL', "https://train.skillerwhale.com")
+    def uri(self):
+        return create_skiller_whale_url(self.path)
 
     @property
-    def updates_uri(self):
-        return f"{self.hostname}/attendances/{self.attendance_id}/file_snapshots"
+    def path(self):
+        return f'attendances/{self.attendance_id}/file_snapshots'
 
     @staticmethod
     def get_file_data(path):
@@ -47,7 +55,7 @@ class Updater:
     def post_file(self, path):
         data = self.get_file_data(path)
         headers = self.get_headers(data)
-        return requests.post(self.updates_uri, data=data, headers=headers)
+        return requests.post(self.uri, data=data, headers=headers)
 
     def send_file_update(self, path):
         print(f"Uploading: {path}", end='\t')
@@ -62,9 +70,26 @@ class Updater:
             print(response.text)
 
 
+class Pinger:
+    def __init__(self, attendance_id):
+        self.attendance_id = attendance_id
+
+    @property
+    def uri(self):
+        return create_skiller_whale_url(self.path)
+
+    @property
+    def path(self):
+        return f'attendances/{self.attendance_id}/pings'
+
+    def ping(self):
+        requests.post(self.uri)
+
+
 class Watcher:
-    def __init__(self, updater, base_path='.'):
+    def __init__(self, updater, pinger, base_path='.'):
         self.updater = updater
+        self.pinger = pinger
         self.base_path = base_path
         self._file_hashes = {}
         # Tracks whether this is the first pass of the directory tree. If not,
@@ -104,6 +129,7 @@ class Watcher:
 
     def poll_for_changes(self, wait_time=1):
         while True:
+            self.pinger.ping()
             self._check_dir_for_changes(self.base_path)
             self._first_pass = False
             time.sleep(wait_time)  # Poll for changes every `wait_time` seconds
@@ -119,7 +145,8 @@ def skiller_whale_sync():
     print("Hit Ctrl+C to stop.")
 
     updater = Updater(attendance_id=attendance_id)
-    watcher = Watcher(updater=updater)
+    pinger = Pinger(attendance_id=attendance_id)
+    watcher = Watcher(updater=updater, pinger=pinger)
     watcher.poll_for_changes()
 
 
