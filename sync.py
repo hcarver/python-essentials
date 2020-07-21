@@ -55,19 +55,21 @@ class Updater:
     def post_file(self, path):
         data = self.get_file_data(path)
         headers = self.get_headers(data)
-        return requests.post(self.uri, data=data, headers=headers)
+        try:
+            response = requests.post(self.uri, data=data, headers=headers)
+        except requests.exceptions.ConnectionError:
+            print(f"Failed\nCould not reach {SERVER_URL}")
+        else:
+            print(f"Status: {response.status_code}")
+            if response.text:
+                print(response.text)
 
     def send_file_update(self, path):
         print(f"Uploading: {path}", end='\t')
         if not self.attendance_id:
             print("No attendance id set; file update not sent.")
             return
-
-        response = self.post_file(path)
-        print(f"Status: {response.status_code}")
-
-        if response.text:
-            print(response.text)
+        self.post_file(path)
 
 
 class Pinger:
@@ -83,7 +85,10 @@ class Pinger:
         return f'attendances/{self.attendance_id}/pings'
 
     def ping(self):
-        requests.post(self.uri)
+        try:
+            requests.post(self.uri)
+        except requests.exceptions.ConnectionError:
+            pass  # Tolerate failed pings
 
 
 class Watcher:
@@ -112,7 +117,11 @@ class Watcher:
         if not self._first_pass:
             old_hash = self._file_hashes.get(path)
             if old_hash != hashed:
-                self.updater.send_file_update(path)
+                try:
+                    self.updater.send_file_update(path)
+                except Exception as err:
+                    # This has to be fairly generic to handle any updater
+                    print("Unexpected error in updater class:", err)
         self._file_hashes[path] = hashed
 
     def _check_dir_for_changes(self, dir_path):
@@ -129,10 +138,19 @@ class Watcher:
 
     def poll_for_changes(self, wait_time=1):
         while True:
-            self.pinger.ping()
-            self._check_dir_for_changes(self.base_path)
-            self._first_pass = False
-            time.sleep(wait_time)  # Poll for changes every `wait_time` seconds
+            try:
+                self.pinger.ping()
+                self._check_dir_for_changes(self.base_path)
+            except Exception as err:
+                # This should not be reached except in exceptional circumstances
+                # We want to continue looping even if we hit an unexpected error
+                print("Unexpected error in file watcher:", err)
+            else:
+                self._first_pass = False
+
+            # Poll for changes every `wait_time` seconds, whether or not the
+            # previous call succeeded.
+            time.sleep(wait_time)
 
 
 def skiller_whale_sync():
